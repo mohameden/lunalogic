@@ -35,7 +35,6 @@ def pay():
 
 @post('/publish')
 def submit_create():
-    #etf = append_etf(request.forms.get('symbol'), request.forms.get('description'), extract_components(request))
     country = request.forms.get('country')
     price = request.forms.get('price')
     publish_price(accounts[country], float(price))

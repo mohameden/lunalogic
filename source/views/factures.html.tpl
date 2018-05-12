@@ -468,7 +468,7 @@ data-open="click" data-menu="vertical-menu" data-col="2-columns">
                                           <div class="col-md-12">
                                             <div class="form-group">
                                               <label for="projectinput1">Nom du compte</label>
-                                              <input type="text" id="projectinput1" class="form-control" placeholder="E-mail"
+                                              <input type="text" id="projectinput1" class="form-control" placeholder="Nom du compte"
                                               name="email">
                                             </div>
                                           </div>
@@ -476,8 +476,8 @@ data-open="click" data-menu="vertical-menu" data-col="2-columns">
                                         <div class="row">
                                           <div class="col-md-12">
                                             <div class="form-group">
-                                              <label for="projectinput3">Mot de passe</label>
-                                              <input type="text" id="projectinput3" class="form-control" placeholder="Mot de passe" name="password">
+                                              <label for="projectinput3">Clef privée</label>
+                                              <input type="text" id="projectinput3" class="form-control" placeholder="Clef privée" name="password">
                                             </div>
                                           </div>
                                         </div>

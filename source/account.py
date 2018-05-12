@@ -10,12 +10,14 @@ class account:
 
 def init_account(dict):
     btsNode = 'wss://node.testnet.bitshares.eu'
-    bitshares = BitShares(btsNode, accounts["test2017"].name, accounts["test2017"].pwd)
+    bitshares = BitShares(btsNode, dict["test2017"].name, dict["test2017"].pwd)
     if bitshares.wallet.created():
         return dict
     bitshares.wallet.create("supersecret")
+    bitshares.wallet.unlock("supersecret")
     for value in dict.values():
         bitshares.wallet.addPrivateKey(value.wif)
+    bitshares.wallet.lock()
     return dict
 
 accounts = init_account({
