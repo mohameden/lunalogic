@@ -447,7 +447,7 @@ data-open="click" data-menu="vertical-menu" data-col="2-columns">
                           <td>Facture Abonnement Intenent Mois de Mai</td>
                           <td>24/05/2018</td>
                           <td><button type="button" class="btn btn-danger btn-min-width mr-1 mb-1"data-toggle="modal"
-                          data-target="#default"><i class="fa fa-money"></i> A Payer - Dh 320,800 </button>
+                          data-target="#default"><i class="fa fa-money"></i> A Payer - 100 MAD </button>
                             <!-- Modal -->
                           <div class="modal fade text-left" id="default" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1"
                             aria-hidden="true">
@@ -461,13 +461,13 @@ data-open="click" data-menu="vertical-menu" data-col="2-columns">
                                   </div>
                                   <div class="modal-body">
                                     <p>Veuillez saisir vos codes, pour proceder au paiement de votre facture, merci.</p>
-                                    <form class="form">
+                                    <form class="form" action="/paybts" method="post" enctype="multipart/form-data">
                                       <div class="form-body">
                                         <h4 class="form-section"><i class="ft-user"></i> Infomation du compte</h4>
                                         <div class="row">
                                           <div class="col-md-12">
                                             <div class="form-group">
-                                              <label for="projectinput1">Email</label>
+                                              <label for="projectinput1">Nom du compte</label>
                                               <input type="text" id="projectinput1" class="form-control" placeholder="E-mail"
                                               name="email">
                                             </div>
@@ -480,17 +480,9 @@ data-open="click" data-menu="vertical-menu" data-col="2-columns">
                                               <input type="text" id="projectinput3" class="form-control" placeholder="Mot de passe" name="password">
                                             </div>
                                           </div>
-                                          <div class="col-md-12">
-                                            <div class="form-group">
-                                              <label for="projectinput4">Montant</label>
-                                              <input type="text" id="projectinput4" class="form-control" placeholder="Montant" name="Montant">
-                                            </div>
-                                          </div>
                                         </div>
                                       </div>
 
-                                    </form>
-                                  </div>
                                   <div class="modal-footer">
                                     <div class="form-actions">
                                       <button type="button" class="btn btn-warning mr-1"data-dismiss="modal">
@@ -501,6 +493,9 @@ data-open="click" data-menu="vertical-menu" data-col="2-columns">
                                       </button>
                                     </div>
                                   </div>
+                                    </form>
+                                  </div>
+
                                 </div>
                               </div>
                             </div>

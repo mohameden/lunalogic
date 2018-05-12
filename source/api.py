@@ -1,7 +1,8 @@
-from bottle import run, template, get, post, request, static_file, template, redirect
+from bottle import run, get, post, request, static_file, template, redirect
 import bottle
 from publishprice import publish_price
 from account import accounts
+from exchange import payement
 
 ###### API #######
 
@@ -22,13 +23,21 @@ def index():
 def pay():
     return template('views/factures.html')
 
+@post('/paybts')
+def pay():
+    email = request.forms.get('email')
+    password = request.forms.get('password')
+    print(email)
+    print(password)
+    amount = 100
+    payement(accounts[email], accounts["telecom"], amount, accounts[email].asset, accounts["telecom"].asset)
+    return redirect('/pay')
+
 @post('/publish')
 def submit_create():
     #etf = append_etf(request.forms.get('symbol'), request.forms.get('description'), extract_components(request))
     country = request.forms.get('country')
     price = request.forms.get('price')
-    print(country)
-    print(price)
     publish_price(accounts[country], float(price))
     return redirect('/')
 
