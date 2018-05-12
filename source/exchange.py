@@ -1,10 +1,9 @@
 from bitshares import BitShares
 from bitshares.account import Account
-from bitshares.price import Price, PriceFeed
-from bitshares.market import Market
 from bitshares.asset import Asset
 from bitshares.amount import Amount
-from account import account, accounts
+from account import accounts
+from transaction_balancing import myBuy
 
 btsNode = 'wss://node.testnet.bitshares.eu'
 
@@ -30,24 +29,20 @@ def convert(bitshares, current, target, amount, account):
     current_ass = Asset(current, False, True, bitshares_instance=bitshares)
     print(current_ass.feed)
     curPerBts = current_ass.feed["settlement_price"]
-    print(curPerBts)
 
     target_ass = Asset(target, False, True, bitshares_instance=bitshares)
     print(target_ass.feed)
     tarPerBts = target_ass.feed["settlement_price"]
-    print(tarPerBts)
-
-    neededBts = float(amount) / float(tarPerBts)
 
     print(curPerBts)
     print(tarPerBts)
-    bitshares.wallet.unlock("supersecret")
 
-    market = Market(target + ":" + current, bitshares_instance=bitshares)
-    market.buy(Price(Amount(tarPerBts, target, bitshares_instance=bitshares), Amount(float(curPerBts), current, bitshares_instance=bitshares)), Amount(str(amount) + " " + target, bitshares_instance=bitshares), account=Account(account.name, bitshares_instance=bitshares))
+    amount_quot = Amount(float(tarPerBts), target, bitshares_instance=bitshares)
+    amount_base = Amount(float(curPerBts), current, bitshares_instance=bitshares)
+    myBuy(target, current, amount_quot, amount_base, amount, Account(account.name, bitshares_instance=bitshares), bitshares)
 
+    return
 
-    bitshares.wallet.lock()
 
 
 
