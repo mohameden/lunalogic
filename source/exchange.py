@@ -40,15 +40,12 @@ def convert(bitshares, current, target, amount, account):
     neededBts = float(amount) / float(tarPerBts)
 
     print(curPerBts)
-    print(neededBts)
+    print(tarPerBts)
     bitshares.wallet.unlock("supersecret")
-    market = Market("TEST:" + current, bitshares_instance=bitshares)
 
-    test1 = Amount(1, "TEST", bitshares_instance=bitshares)
-    market.buy(Price(test1, Amount(float(curPerBts), current, bitshares_instance=bitshares)), Amount(str(neededBts) + " TEST", bitshares_instance=bitshares), account=Account(account.name, bitshares_instance=bitshares))
+    market = Market(target + ":" + current, bitshares_instance=bitshares)
+    market.buy(Price(Amount(tarPerBts, target, bitshares_instance=bitshares), Amount(float(curPerBts), current, bitshares_instance=bitshares)), Amount(str(amount) + " " + target, bitshares_instance=bitshares), account=Account(account.name, bitshares_instance=bitshares))
 
-    market = Market(target + ":TEST", bitshares_instance=bitshares)
-    market.buy(Price(Amount(tarPerBts, target, bitshares_instance=bitshares), test1), Amount(str(amount) + " " + target, bitshares_instance=bitshares), account=Account(account.name, bitshares_instance=bitshares))
 
     bitshares.wallet.lock()
 
@@ -77,4 +74,4 @@ def payement(buyer, seller, amount, ccy_used, ccy_received):
 
 
 if __name__ == "__main__":
-    payement(accounts["maroc"], accounts["tunisie"], 5, accounts["maroc"].asset, accounts["tunisie"].asset)
+    payement(accounts["maroc"], accounts["tunisie"], 4, accounts["maroc"].asset, accounts["tunisie"].asset)
