@@ -446,7 +446,71 @@ data-open="click" data-menu="vertical-menu" data-col="2-columns">
                           <td>11/05/2018</td>
                           <td>Facture Abonnement Intenent Mois de Mai</td>
                           <td>24/05/2018</td>
-                          <td><button type="button" class="btn btn-danger btn-min-width mr-1 mb-1"><i class="fa fa-money"></i> A Payer - Dh 320,800 </button></td>
+                          <td><button type="button" class="btn btn-danger btn-min-width mr-1 mb-1"data-toggle="modal"
+                          data-target="#default"><i class="fa fa-money"></i> A Payer - Dh 320,800 </button>
+                            <!-- Modal -->
+                          <div class="modal fade text-left" id="default" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1"
+                            aria-hidden="true">
+                              <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h4 class="modal-title" id="myModalLabel1">Paiement facture</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                    </button>
+                                  </div>
+                                  <div class="modal-body">
+                                    <p>Veuillez saisir vos codes, pour proceder au paiement de votre facture, merci.</p>
+                                    <form class="form">
+                                      <div class="form-body">
+                                        <h4 class="form-section"><i class="ft-user"></i> Infomation du compte</h4>
+                                        <div class="row">
+                                          <div class="col-md-12">
+                                            <div class="form-group">
+                                              <label for="projectinput1">Email</label>
+                                              <input type="text" id="projectinput1" class="form-control" placeholder="E-mail"
+                                              name="email">
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div class="row">
+                                          <div class="col-md-12">
+                                            <div class="form-group">
+                                              <label for="projectinput3">Mot de passe</label>
+                                              <input type="text" id="projectinput3" class="form-control" placeholder="Mot de passe" name="password">
+                                            </div>
+                                          </div>
+                                          <div class="col-md-12">
+                                            <div class="form-group">
+                                              <label for="projectinput4">Montant</label>
+                                              <input type="text" id="projectinput4" class="form-control" placeholder="Montant" name="Montant">
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+
+                                    </form>
+                                  </div>
+                                  <div class="modal-footer">
+                                    <div class="form-actions">
+                                      <button type="button" class="btn btn-warning mr-1"data-dismiss="modal">
+                                        <i class="ft-x"></i> Annuler
+                                      </button>
+                                      <button type="submit" class="btn btn-primary" id="confirm-text">
+                                        <i class="fa fa-check-square-o"></i> Valider
+                                      </button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+
+
+
+
+
+                            <!-- End Modal -->
+                        </td>
                         </tr>
                       </tbody>
                     </table>
@@ -473,6 +537,7 @@ data-open="click" data-menu="vertical-menu" data-col="2-columns">
   <!-- BEGIN VENDOR JS-->
   <!-- BEGIN PAGE VENDOR JS-->
   <script src="assets/app-assets/vendors/js/tables/jsgrid/jsgrid.min.js" type="text/javascript"></script>
+  <script src="assets/app-assets/vendors/js/extensions/sweetalert.min.js" type="text/javascript"></script>
   <script src="assets/app-assets/vendors/js/tables/jsgrid/griddata.js" type="text/javascript"></script>
   <!-- END PAGE VENDOR JS-->
   <!-- BEGIN STACK JS-->
@@ -482,6 +547,7 @@ data-open="click" data-menu="vertical-menu" data-col="2-columns">
   <!-- END STACK JS-->
   <!-- BEGIN PAGE LEVEL JS-->
   <script src="assets/app-assets/js/scripts/tables/jsgrid/jsgrid.js" type="text/javascript"></script>
+  <script src="assets/app-assets/js/scripts/extensions/sweet-alerts.js" type="text/javascript"></script>
   <!-- END PAGE LEVEL JS-->
 </body>
 </html>
