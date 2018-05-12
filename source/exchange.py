@@ -64,13 +64,17 @@ def transfert(acc_from, acc_to, asset, amount):
     bitshares.wallet.lock()
 
 
-if __name__ == "__main__":
-    acc = account("test2017", "P5KHthsex8FJtWb7MXRqif9vZWmZA2YkMZCNn11thKoq7", "5KWUzPCHAH9nozGh6GMJn1ojjC8Xz5wsfHnQXJ8hGtJFLz1cm6H", "")
-    bitshares = BitShares(btsNode, acc.name, acc.pwd)
+def payement(buyer, seller, amount, ccy_used, ccy_received):
+    bitshares = BitShares(btsNode, buyer.name, buyer.pwd)
+
+    # Buggy without it...
     current_ass = Asset("TESTMRU", False, True, bitshares_instance=bitshares)
     price = current_ass.feed["settlement_price"]
+    # End of "hacks"
 
-    print("MRU")
-    convert(bitshares, "TESTMRU", "TESTTND", 10, acc)
+    convert(bitshares, ccy_used, ccy_received, amount, buyer)
+    transfert(buyer, seller, ccy_received, amount)
 
-    transfert(accounts["maroc"], acc, "TEST", 10)
+
+if __name__ == "__main__":
+    payement(accounts["maroc"], accounts["tunisie"], 5, accounts["maroc"].asset, accounts["tunisie"].asset)
