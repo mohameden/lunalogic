@@ -69,4 +69,4 @@ def payement(buyer, seller, amount, ccy_used, ccy_received):
 
 
 if __name__ == "__main__":
-    payement(accounts["bc-maroc"], accounts["bc-tunisie"], 4, accounts["bc-maroc"].asset, accounts["bc-tunisie"].asset)
+    payement(accounts["bc-maroc"], accounts["bc-tunisie"], 10, accounts["bc-maroc"].asset, accounts["bc-tunisie"].asset)
