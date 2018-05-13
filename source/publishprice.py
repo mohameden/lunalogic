@@ -10,7 +10,8 @@ def publish_price(account, price):
     btsNode = 'wss://node.testnet.bitshares.eu'
     bitshares = BitShares(btsNode, account.name, account.pwd)
 
-    stlprice = Price(price, account.asset + "/TEST", bitshares_instance=bitshares)
+    price = float(price)
+    stlprice = Price(price, "TEST/" + account.asset, bitshares_instance=bitshares)
 
     btsAccount = Account(account.name, bitshares_instance=bitshares)
 
