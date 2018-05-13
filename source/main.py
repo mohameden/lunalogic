@@ -4,12 +4,6 @@ from publishprice import publish_price
 from account import accounts
 from exchange import payement
 
-###### API #######
-
-@get('/ping')
-def ping():
-    return 'pong'
-
 ####### UI #######
 @get('/assets/<filepath:re:.*\.*>')
 def css(filepath):
@@ -24,13 +18,11 @@ def pay():
     return template('views/factures.html')
 
 @post('/paybts')
-def pay():
+def paybts():
     email = request.forms.get('email')
     password = request.forms.get('password')
-    print(email)
-    print(password)
     amount = 100
-    payement(accounts[email], accounts["telecom"], amount, accounts[email].asset, accounts["telecom"].asset)
+    payement(accounts[email], accounts["maroc-telecom"], amount, accounts[email].asset, accounts["maroc-telecom"].asset)
     return redirect('/pay')
 
 @post('/publish')

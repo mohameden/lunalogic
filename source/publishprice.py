@@ -19,4 +19,4 @@ def publish_price(account, price):
     bitshares.wallet.lock()
 
 if __name__ == "__main__":
-    publish_price(accounts["mauritanie"], 35.5)
+    publish_price(accounts["bc-mauritanie"], 35.5)
