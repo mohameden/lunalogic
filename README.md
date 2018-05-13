@@ -24,10 +24,11 @@ npm start
 goto http://localhost:8080
 ```
 
-Building the smartcoin-management
+Building the smartcoin-management (source folder)
 -----------------------------------------
 
 ```
+cd source
 pip install bitshares bottle
 python main.py
 goto http://localhost:8088
