@@ -4,12 +4,13 @@ import ActionSheet from "react-foundation-apps/src/action-sheet";
 import ZfApi from "react-foundation-apps/src/utils/foundation-api";
 
 class AutocompleteInput extends Component {
+
     constructor() {
         super();
         this.handleChange = this.handleChange.bind(this);
         this.handleItemClick = this.handleItemClick.bind(this);
         this.onKeyDown = this.onKeyDown.bind(this);
-        this.state = {items: []};
+        this.state = { items: [] };
     }
 
     getInput() {
@@ -22,7 +23,7 @@ class AutocompleteInput extends Component {
     }
 
     setValue(value) {
-        return (this.getInput().value = value);
+        return this.getInput().value = value;
     }
 
     clear() {
@@ -38,28 +39,19 @@ class AutocompleteInput extends Component {
         e.stopPropagation();
         let action_sheet_id = this.props.id + "-container";
         let value = e.target.value;
-        let items =
-            value === ""
-                ? []
-                : this.props.options.filter(i => {
-                      let v = typeof i === "string" ? i : i[1];
-                      return v.startsWith(value);
-                  });
+        let items = value === "" ? [] : this.props.options.filter( i => {
+            let v = typeof i === "string" ? i : i[1];
+            return v.startsWith(value);
+        });
         this.setState({items});
-        if (items.size >= 0) {
-            if (
-                items.size > 0 &&
-                !(items.size === 1 && items.first() === value)
-            ) {
+        if(items.size >= 0) {
+            if(items.size > 0 && !(items.size === 1 && items.first() === value)) {
                 ZfApi.publish(action_sheet_id, "open");
             } else {
                 ZfApi.publish(action_sheet_id, "close");
             }
         } else {
-            if (
-                items.length > 0 &&
-                !(items.length === 1 && items[0][1] === value)
-            ) {
+            if(items.length > 0 && !(items.length === 1 && items[0][1] === value)) {
                 ZfApi.publish(action_sheet_id, "open");
             } else {
                 ZfApi.publish(action_sheet_id, "close");
@@ -76,46 +68,33 @@ class AutocompleteInput extends Component {
         input.value = value;
         ZfApi.publish(this.props.id + "-container", "close");
         if (this.props.onChange) {
-            let event = {target: {value: value, id: this.props.id}};
+            let event = { target: { value: value, id: this.props.id}};
             this.props.onChange(event);
         }
     }
 
     onKeyDown(e) {
-        if (this.props.onEnter && event.keyCode === 13) this.props.onEnter(e);
+        if(this.props.onEnter && event.keyCode === 13) this.props.onEnter(e);
     }
 
     render() {
-        var items = this.state.items.sort().map(i => {
-            let j = typeof i === "string" ? [i, i] : i;
-            return (
-                <li key={j[0]}>
-                    <a href data-value={j[0]} onClick={this.handleItemClick}>
-                        {j[1]}
-                    </a>
-                </li>
-            );
-        });
+        var items = this.state.items
+            .sort()
+            .map( i => {
+                let j = typeof i === "string" ? [i, i] : i;
+                return (<li key={j[0]}><a href data-value={j[0]} onClick={this.handleItemClick}>{j[1]}</a></li>);
+            });
         let action_sheet_id = this.props.id + "-container";
         return (
             <div className="autocomplete">
-                <ActionSheet
-                    className="autocomplete"
-                    ref="action_sheet"
-                    id={action_sheet_id}
-                >
-                    <input
-                        name="value"
-                        type="text"
-                        autoComplete="off"
-                        id={this.props.id}
-                        placeholder={this.props.placeholder}
-                        defaultValue={this.props.initial_value}
-                        onChange={this.handleChange}
-                        onKeyDown={this.onKeyDown}
-                    />
-                    <ActionSheet.Content>
-                        <ul className="no-first-element-top-border">{items}</ul>
+                <ActionSheet className="autocomplete" ref="action_sheet" id={action_sheet_id}>
+                    <input name="value" type="text" autoComplete="off" id={this.props.id}
+                           placeholder={this.props.placeholder} defaultValue={this.props.initial_value}
+                           onChange={this.handleChange} onKeyDown={this.onKeyDown}/>
+                    <ActionSheet.Content >
+                        <ul className="no-first-element-top-border">
+                            {items}
+                        </ul>
                     </ActionSheet.Content>
                 </ActionSheet>
             </div>

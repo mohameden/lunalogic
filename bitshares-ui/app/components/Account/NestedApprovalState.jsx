@@ -9,6 +9,7 @@ import {cloneDeep} from "lodash";
 import {ChainStore} from "bitsharesjs/es";
 
 class AccountPermissionTree extends React.Component {
+
     static propTypes = {
         account: ChainTypes.ChainAccount.isRequired,
         accounts: ChainTypes.ChainAccountsList,
@@ -20,13 +21,7 @@ class AccountPermissionTree extends React.Component {
     };
 
     render() {
-        let {
-            account,
-            available,
-            availableKeys,
-            permission,
-            threshold
-        } = this.props;
+        let {account, available, availableKeys, permission, threshold} = this.props;
 
         let isOK = permission.isAvailable(available);
         let isNested = permission.isNested();
@@ -34,75 +29,36 @@ class AccountPermissionTree extends React.Component {
 
         let status = [];
 
-        let notNestedWeight =
-            threshold && threshold > 10
-                ? utils.get_percentage(permission.weight, this.props.threshold)
-                : permission.weight;
+        let notNestedWeight = (threshold && threshold > 10) ?
+            utils.get_percentage(permission.weight, this.props.threshold) :
+            permission.weight;
 
-        let nestedWeight =
-            permission && permission.threshold > 10
-                ? `${utils.get_percentage(
-                      permission.getStatus(available, availableKeys),
-                      permission.threshold
-                  )} / 100%`
-                : `${permission.getStatus(available, availableKeys)} / ${
-                      permission.threshold
-                  }`;
+        let nestedWeight = (permission && permission.threshold > 10) ?
+            `${utils.get_percentage(permission.getStatus(available, availableKeys), permission.threshold)} / 100%` :
+            `${permission.getStatus(available, availableKeys)} / ${permission.threshold}`;
 
         // if (!account || typeof account === "string") return null;
 
         status.push(
-            <div
-                key={account.get("id")}
-                style={{
-                    textAlign: "left",
-                    width: "100%",
-                    clear: "both",
-                    paddingBottom: 5
-                }}
-            >
+            <div key={account.get("id")} style={{textAlign: "left", width: "100%", clear: "both", paddingBottom: 5}}>
                 <div
                     className="inline-block"
                     style={{
                         paddingLeft: `${5 * this.props.indent}%`
                     }}
                 >
-                    <LinkToAccountById
-                        subpage="permissions"
-                        account={account.get("id")}
-                    />
-                    {!isNested && notNestedWeight
-                        ? `${
-                              notNestedWeight && notNestedWeight.length === 2
-                                  ? `\u00A0\u00A0`
-                                  : ""
-                          }(${notNestedWeight}) `
-                        : null}
+                    <LinkToAccountById subpage="permissions" account={account.get("id")} />
+                    {!isNested && notNestedWeight ? `${notNestedWeight && notNestedWeight.length === 2 ? `\u00A0\u00A0` : ""}(${notNestedWeight}) ` : null}
                 </div>
-                <div
-                    className="float-right"
-                    style={{paddingLeft: 20, marginRight: 10}}
-                >
+                <div className="float-right" style={{paddingLeft: 20, marginRight: 10}}>
                     {!isNested && !isMultiSig ? (
-                        <span>
-                            {isOK ? (
-                                <Icon
-                                    name="checkmark-circle"
-                                    size="1x"
-                                    className="success"
-                                />
-                            ) : (
-                                <Icon
-                                    name="cross-circle"
-                                    size="1x"
-                                    className="error"
-                                />
-                            )}
-                        </span>
-                    ) : (
-                        <span className={isOK ? "success-text" : ""}>
-                            {nestedWeight}
-                        </span>
+                    <span>
+                        {isOK ? <Icon name="checkmark-circle" size="1x" className="success"/> :
+                                <Icon name="cross-circle" size="1x" className="error"/>}
+                    </span>) : (
+                    <span className={isOK ? "success-text" : ""}>
+                        {nestedWeight}
+                    </span>
                     )}
                 </div>
             </div>
@@ -122,7 +78,7 @@ class AccountPermissionTree extends React.Component {
                         threshold={permission.threshold}
                     />
                 );
-            });
+            })
 
             if (permission.keys.length) {
                 permission.keys.forEach(key => {
@@ -134,7 +90,7 @@ class AccountPermissionTree extends React.Component {
                             indent={this.props.indent + 1}
                         />
                     );
-                });
+                })
             }
         }
 
@@ -144,6 +100,7 @@ class AccountPermissionTree extends React.Component {
 const BoundAccountPermissionTree = BindToChainState(AccountPermissionTree);
 
 class KeyPermissionBranch extends React.Component {
+
     static propTypes = {
         indent: React.PropTypes.number.isRequired
     };
@@ -159,39 +116,19 @@ class KeyPermissionBranch extends React.Component {
 
         let status = [];
         status.push(
-            <div
-                key={permission.id}
-                style={{textAlign: "left", width: "100%", paddingBottom: 5}}
-            >
+            <div key={permission.id} style={{textAlign: "left", width: "100%", paddingBottom: 5}}>
                 <div
                     className="inline-block"
                     style={{
                         paddingLeft: `${5 * this.props.indent}%`
                     }}
                 >
-                    <span>
-                        {permission.id.substr(0, 20 - 4 * this.props.indent)}...
-                        ({permission.weight})
-                    </span>
+                    <span>{permission.id.substr(0, 20 - 4 * this.props.indent)}... ({permission.weight})</span>
                 </div>
-                <div
-                    className="float-right"
-                    style={{paddingLeft: 20, marginRight: 10}}
-                >
+                <div className="float-right" style={{paddingLeft: 20, marginRight: 10}}>
                     <span>
-                        {isOK ? (
-                            <Icon
-                                name="checkmark-circle"
-                                size="1x"
-                                className="success"
-                            />
-                        ) : (
-                            <Icon
-                                name="cross-circle"
-                                size="1x"
-                                className="error"
-                            />
-                        )}
+                        {isOK ? <Icon name="checkmark-circle" size="1x" className="success"/> :
+                                <Icon name="cross-circle" size="1x" className="error"/>}
                     </span>
                 </div>
             </div>
@@ -202,8 +139,9 @@ class KeyPermissionBranch extends React.Component {
 }
 
 class SecondLevel extends React.Component {
+
     render() {
-        let {requiredPermissions, available, availableKeys} = this.props;
+        let {requiredPermissions, available, availableKeys, type} = this.props;
 
         let status = [];
 
@@ -220,11 +158,16 @@ class SecondLevel extends React.Component {
             );
         });
 
-        return <div>{status}</div>;
+        return (
+            <div>
+                {status}
+            </div>
+        );
     }
 }
 
 class FirstLevel extends React.Component {
+
     static propTypes = {
         required: ChainTypes.ChainAccountsList,
         available: ChainTypes.ChainAccountsList
@@ -268,7 +211,7 @@ class FirstLevel extends React.Component {
     }
 
     render() {
-        let {type, added, removed, availableKeys} = this.props;
+        let {type, proposal, added, removed, availableKeys} = this.props;
         let {requiredPermissions, required, available} = this.state;
 
         available = cloneDeep(available);
@@ -304,6 +247,7 @@ class FirstLevel extends React.Component {
 FirstLevel = BindToChainState(FirstLevel, {keep_updating: true});
 
 class ProposalWrapper extends React.Component {
+
     static propTypes = {
         proposal: ChainTypes.ChainObject.isRequired,
         type: React.PropTypes.string.isRequired

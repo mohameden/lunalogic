@@ -1,49 +1,43 @@
 /** Generic set of components for dealing with data in the ChainStore */
 import React, {Component, Children} from "react";
-import {connect} from "alt-react";
+import { connect } from "alt-react";
 import ChainTypes from "components/Utility/ChainTypes";
 import BindToChainState from "components/Utility/BindToChainState";
 import AccountStore from "stores/AccountStore";
 import {pairs} from "lodash";
 
-class ResolvemyActiveAccountsChainState extends Component {
+class ResolveLinkedAccountsChainState extends Component {
+
     static propTypes = {
-        myActiveAccounts: ChainTypes.ChainAccountsList.isRequired
-    };
+        linkedAccounts: ChainTypes.ChainAccountsList.isRequired
+    }
 
     render() {
-        let myActiveAccounts = [];
-        pairs(this.props.myActiveAccounts).forEach(account => {
-            if (!account[1]) return;
+        let linkedAccounts = [];
+        pairs(this.props.linkedAccounts).forEach( account => {
+            if( !account[1]) return;
             console.log("... account.toJS()", account[1].toJS());
-            myActiveAccounts.push(account[1]);
+            linkedAccounts.push(account[1]);
         });
         let child = Children.only(this.props.children);
-        if (!child)
-            return (
-                <span>{myActiveAccounts.map(a => <br>{a.toJS()}</br>)}</span>
-            );
-        // Pass the list to a child reactjs component as this.props.resolvedmyActiveAccounts
-        child = React.cloneElement(child, {myActiveAccounts});
+        if( ! child) return <span>{linkedAccounts.map(a => <br>{a.toJS()}</br>)}</span>;
+        // Pass the list to a child reactjs component as this.props.resolvedLinkedAccounts
+        child = React.cloneElement(child, { linkedAccounts });
         return <span>{child}</span>;
     }
 }
-ResolvemyActiveAccountsChainState = BindToChainState(
-    ResolvemyActiveAccountsChainState
-);
+ResolveLinkedAccountsChainState = BindToChainState(ResolveLinkedAccountsChainState);
 
-class ResolvemyActiveAccounts extends Component {
+class ResolveLinkedAccounts extends Component {
     render() {
-        return (
-            <ResolvemyActiveAccountsChainState
-                myActiveAccounts={this.props.myActiveAccounts}
-                children={this.props.children}
-            />
-        );
+        return <ResolveLinkedAccountsChainState
+            linkedAccounts={this.props.linkedAccounts}
+            children={this.props.children}
+        />;
     }
 }
 
-ResolvemyActiveAccounts = connect(ResolvemyActiveAccounts, {
+ResolveLinkedAccounts = connect(ResolveLinkedAccounts, {
     listenTo() {
         return [AccountStore];
     },
@@ -52,4 +46,4 @@ ResolvemyActiveAccounts = connect(ResolvemyActiveAccounts, {
     }
 });
 
-export default ResolvemyActiveAccounts;
+export default ResolveLinkedAccounts;

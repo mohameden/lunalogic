@@ -3,8 +3,6 @@ import BindToChainState from "../Utility/BindToChainState";
 import ChainTypes from "../Utility/ChainTypes";
 import TimeAgo from "../Utility/TimeAgo";
 import utils from "common/utils";
-import counterpart from "counterpart";
-import getLocale from "browser-locale";
 
 /**
  * @brief displays block's date and time based on block number
@@ -14,6 +12,7 @@ import getLocale from "browser-locale";
  **/
 
 class BlockTime extends React.Component {
+
     static propTypes = {
         block_number: React.PropTypes.number.isRequired,
         globalObject: ChainTypes.ChainObject.isRequired,
@@ -35,17 +34,11 @@ class BlockTime extends React.Component {
     }
 
     calcTime(block_number) {
-        this.setState({
-            time: utils.calc_block_time(
-                block_number,
-                this.props.globalObject,
-                this.props.dynGlobalObject
-            )
-        });
+        this.setState({time: utils.calc_block_time(block_number, this.props.globalObject, this.props.dynGlobalObject)});
     }
 
     componentWillReceiveProps(next_props) {
-        if (next_props.block_number !== this.props.block_number) {
+        if(next_props.block_number !== this.props.block_number) {
             this.calcTime(next_props.block_number);
         }
     }
@@ -56,20 +49,11 @@ class BlockTime extends React.Component {
     }
     */
 
-    //{this.state.time ?  <FormattedDate value={this.state.time} format="short"/> : null}
+                //{this.state.time ?  <FormattedDate value={this.state.time} format="short"/> : null}
     render() {
         return (
             <span className="time" key={this.props.block_number}>
-                {this.state.time ? (
-                    this.props.fullDate ? (
-                        counterpart.localize(new Date(this.state.time), {
-                            type: "date",
-                            format: "full"
-                        })
-                    ) : (
-                        <TimeAgo time={this.state.time} />
-                    )
-                ) : null}
+                {this.state.time ? <TimeAgo time={this.state.time} /> : null }
             </span>
         );
     }

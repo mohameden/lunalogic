@@ -6,11 +6,13 @@ import AltContainer from "alt-container";
 import Markets from "./Markets";
 
 class MarketsContainer extends React.Component {
+
     render() {
+
         return (
-            <AltContainer
-                stores={[SettingsStore, AssetStore, MarketsStore]}
-                inject={{
+              <AltContainer 
+                  stores={[SettingsStore, AssetStore, MarketsStore]}
+                  inject={{
                     starredMarkets: () => {
                         return SettingsStore.getState().starredMarkets;
                     },
@@ -23,10 +25,10 @@ class MarketsContainer extends React.Component {
                     marketBase: () => {
                         return MarketsStore.getState().marketBase;
                     }
-                }}
-            >
-                <Markets />
-            </AltContainer>
+                  }} 
+                  >
+                <Markets/>
+              </AltContainer>
         );
     }
 }

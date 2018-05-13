@@ -2,6 +2,7 @@ import React from "react";
 import CSSTransitionGroup from "react-transition-group/CSSTransitionGroup";
 
 export default class TransitionWrapper extends React.Component {
+
     static defaultProps = {
         component: "span",
         enterTimeout: 2000

@@ -4,18 +4,20 @@ import AltContainer from "alt-container";
 import Notifier from "./Notifier";
 
 class NotifierContainer extends React.Component {
+
     render() {
+
         return (
-            <AltContainer
-                stores={[AccountStore]}
-                inject={{
+              <AltContainer 
+                  stores={[AccountStore]}
+                  inject={{
                     account: () => {
                         return AccountStore.getState().currentAccount;
                     }
-                }}
-            >
-                <Notifier />
-            </AltContainer>
+                  }} 
+                  >
+                <Notifier/>
+              </AltContainer>
         );
     }
 }

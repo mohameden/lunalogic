@@ -5,7 +5,9 @@ import AltContainer from "alt-container";
 import Settings from "./Settings";
 
 class SettingsContainer extends React.Component {
+
     render() {
+
         return (
             <AltContainer
                 stores={[SettingsStore]}
@@ -26,7 +28,7 @@ class SettingsContainer extends React.Component {
                         return SettingsStore.getState().apiLatencies;
                     }
                 }}
-            >
+                >
                 <Settings {...this.props} />
             </AltContainer>
         );

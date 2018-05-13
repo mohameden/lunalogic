@@ -1,3 +1,3 @@
-const locales = ["de", "es", "fr", "ko", "it", "tr", "ru", "zh", "ja"];
+const locales = ["de", "es", "fr", "ko", "it", "tr", "ru", "zh"];
 
-module.exports = locales;
+export default locales;

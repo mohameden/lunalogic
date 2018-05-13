@@ -5,6 +5,7 @@ import counterpart from "counterpart";
 import BackupFavorites from "./BackupFavorites";
 
 export default class BackupSettings extends React.Component {
+
     constructor() {
         super();
         this.state = {
@@ -14,6 +15,7 @@ export default class BackupSettings extends React.Component {
     }
 
     _changeType(e) {
+
         this.setState({
             restoreType: this.state.types.indexOf(e.target.value)
         });
@@ -22,30 +24,26 @@ export default class BackupSettings extends React.Component {
     render() {
         let {types, restoreType} = this.state;
         let options = types.map(type => {
-            return (
-                <option key={type} value={type}>
-                    {counterpart.translate(`settings.backupcreate_${type}`)}{" "}
-                </option>
-            );
+            return <option key={type} value={type}>{counterpart.translate(`settings.backupcreate_${type}`)} </option>;
         });
 
         let content;
 
         switch (types[restoreType]) {
-            case "backup":
-                content = <BackupCreate />;
-                break;
+        case "backup":
+            content = <BackupCreate />;
+            break;
 
-            case "brainkey":
-                content = <BackupBrainkey />;
-                break;
+        case "brainkey":
+            content = <BackupBrainkey />;
+            break;
 
-            case "favorites":
-                content = <BackupFavorites />;
-                break;
+        case "favorites":
+            content = <BackupFavorites />;
+            break;
 
-            default:
-                break;
+        default:
+            break;
         }
 
         return (
@@ -62,4 +60,4 @@ export default class BackupSettings extends React.Component {
             </div>
         );
     }
-}
+};
