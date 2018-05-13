@@ -38,7 +38,7 @@ goto http://localhost:8088
 Connection to BitShares
 -----------------------
 - URL : https://testnet.bitshares.eu or http://localhost:8080 if installation has been done
-- account's information are stored in the filed code4chainge/source/account.py using the format ("account's name", "password", other informations)
+- account's information are stored in the filed lunalogic/source/account.py using the format ("account's name", "password", other informations)
 
 For example, to connect using "maroc-telecom", you can find the following line:
 
@@ -67,7 +67,7 @@ https://testnet.bitshares.eu with either "maroc-telecom" or the account used in 
 then "Activity".
 
 
-##### python code4chainge/source/exchange.py : Transfer TND from MAD
+##### python lunalogic/source/exchange.py : Transfer TND from MAD
 The account "bc-maroc" transfer 10 TND to "bc-tunisie" using its MAD. You can see the result by connecting in
 https://testnet.bitshares.eu with accounts "bc-maroc" or "bc-tunisie" in either "Dashboard/Portfolio" to see
 the assets or "Dashboard/Activity" to see the different steps.
